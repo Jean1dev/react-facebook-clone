@@ -7,8 +7,8 @@ import MessageSender from './MessageSender/MessageSender';
 import Post from './Post/Post';
 
 // image
-import arif from '../../img/story/arif.jpg'
-import postImage from '../../img/story/storyImage/web-development.jpg'
+// import arif from '../../img/story/arif.jpg'
+// import postImage from '../../img/story/storyImage/web-development.jpg'
 
 // database
 import db from '../../firebase'
@@ -27,10 +27,10 @@ const Feed = () => {
         <div className="feed">
             <StoryReel />
             <MessageSender />
-            
+
             {
                 posts.map(post => (
-                    <Post 
+                    <Post
                         key={post.data.id}
                         profilePic={post.data.profilePic}
                         message={post.data.message}
@@ -40,7 +40,7 @@ const Feed = () => {
                     />
                 ))
             }
-            {/* <Post 
+            {/* <Post
                 key='1'
                 profilePic={arif}
                 message='WOW this works!'
@@ -48,7 +48,7 @@ const Feed = () => {
                 username='devarif'
                 image={postImage}
             />
-            <Post 
+            <Post
                 key='2'
                 profilePic={arif}
                 message='WOW this works!'

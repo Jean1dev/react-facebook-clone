@@ -16,8 +16,29 @@
     background-color: #2e81f4;
     color: #eff2f5;
     font-weight: 800;
+    margin-top: 10px;
 }
+
 .login button:hover {
     background-color: white;
     color: #2e81f4;
+}
+
+.container-login {
+    flex: 1;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 300px;
+}
+
+.input-login {
+    outline-width: 0;
+    border: none;
+    padding: 5px 20px;
+    margin: 0 10px;
+    border-radius: 99px;
+    width: 100%;
+    margin-top: 10px;
+    height: 50px;
 }
