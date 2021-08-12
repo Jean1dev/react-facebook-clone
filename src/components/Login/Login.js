@@ -1,5 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Login.css';
+
+// auth service
+import { signIn, singUp } from '../../apis/auth/autenticacaoService'
 
 // context api
 import { auth, provider } from '../../firebase'
@@ -12,30 +15,57 @@ import fbTextLogo from '../../img/fbTextLogo.svg'
 import { Button } from '@material-ui/core';
 
 const Login = () => {
-    const [state, dispatch] = useStateValue();
+    const [state, dispatch] = useStateValue()
+    const [login, setLogin] = useState('')
+    const [password, setPassword] = useState('')
 
-    const signIn = () => {
-        // sign in
-        auth.signInWithPopup(provider)
-        .then(result => {
-
-            dispatch({
-                type: actionTypes.SET_USER,
-                user: result.user
-            });
-            console.log(result);
+    const register = () => {
+        singUp(login, password).then(({ data}) => {
+            console.log(data)
         })
-        .catch(error => alert(error.message))
+    }
+
+    const doLogin = () => {
+        // sign in
+        signIn(login, password).then(({ data}) => {
+            console.log(data)
+        })
+        auth.signInWithPopup(provider)
+            .then(result => {
+
+                dispatch({
+                    type: actionTypes.SET_USER,
+                    user: result.user
+                });
+                console.log(result);
+            })
+            .catch(error => alert(error.message))
     }
 
     return (
         <div className="login">
             <div className="loginLogo">
-                <img src={fbLogo} alt=""/>
-                <img src={fbTextLogo} alt="facebook"/>
+                <img src={fbLogo} alt="" />
+                <img src={fbTextLogo} alt="facebook" />
             </div>
 
-            <Button type="submit" onClick={signIn}>Sign In</Button>
+            <div className="container-login">
+                <form>
+                    <input
+                        value={login}
+                        onChange={e => setLogin(e.target.value)}
+                        className="input-login"
+                        placeholder={`Login`}
+                    />
+                    <input
+                        value={password}
+                        className="input-login"
+                        onChange={e => setPassword(e.target.value)}
+                        placeholder={"Password"} />
+                </form>
+                <Button type="submit" onClick={doLogin}>Sign In</Button>
+                <Button type="submit" onClick={register}>Sign Up</Button>
+            </div>
         </div>
     )
 }

@@ -12,14 +12,14 @@ import Login from './components/Login/Login';
 import { useStateValue } from './state/Provider'
 
 function App() {
-  const [{ user }, dispatch] = useStateValue();
+  const [{ user }] = useStateValue();
   return (
     <div className="app">
-      { 
+      {
         !user ? <Login />
         : (
           <>
-            <Header />  
+            <Header />
             <div className="appBody">
               <Sidebar />
               <Feed />

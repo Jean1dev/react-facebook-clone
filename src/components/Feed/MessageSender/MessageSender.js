@@ -13,7 +13,7 @@ import { useStateValue } from '../../../state/Provider'
 import db from '../../../firebase'
 
 const MessageSender = () => {
-    const [{ user }, dispatch] = useStateValue();
+    const [{ user }] = useStateValue();
     const [input, setInput] = useState('');
     const [imageUrl, setImageUrl] = useState('');
 
@@ -38,15 +38,15 @@ const MessageSender = () => {
             <div className="messageSenderTop">
                 <Avatar src={user.photoURL} />
                 <form>
-                    <input 
-                        value={input} 
-                        onChange={e => setInput(e.target.value)} 
-                        className="messageSenderInput" 
-                        placeholder={`What's on your mind, ${user.displayName}?`} 
+                    <input
+                        value={input}
+                        onChange={e => setInput(e.target.value)}
+                        className="messageSenderInput"
+                        placeholder={`What's on your mind, ${user.displayName}?`}
                     />
                     <input
                         value={imageUrl}
-                        onChange={e => setImageUrl(e.target.value)} 
+                        onChange={e => setImageUrl(e.target.value)}
                         placeholder={"Image URL (Optional)"} />
                     <button onClick={handleSubmit} type="submit">Hidden submit</button>
                 </form>

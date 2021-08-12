@@ -19,7 +19,7 @@ import {
 } from '@material-ui/icons'
 
 const Sidebar = () => {
-    const [{ user }, dispatch] = useStateValue();
+    const [{ user }] = useStateValue();
 
     return (
         <div className="sidebar">

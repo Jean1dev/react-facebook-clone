@@ -22,20 +22,20 @@ import ReportIcon from '@material-ui/icons/Report';
 import { useStateValue } from '../../../state/Provider'
 
 const DropdownMenu = () => {
-    const [{ user }, dispatch] = useStateValue();
+    const [{ user }] = useStateValue();
     const [activeMenu, setActiveMenu] = useState('main');
     const [menuHeight, setMenuHeight] = useState(null);
     const dropdownRef = useRef(null);
-  
+
     useEffect(() => {
         setMenuHeight(dropdownRef.current?.firstChild.offsetHeight)
     }, [])
-  
+
     function calcHeight(el) {
         const height = el.offsetHeight;
         setMenuHeight(height);
     }
-  
+
     function DropdownItem(props) {
         return (
             <a href="/#" className="menu-item" onClick={() => props.goToMenu && setActiveMenu(props.goToMenu)}>
@@ -56,10 +56,10 @@ const DropdownMenu = () => {
             </a>
         );
     }
-  
+
     return (
       <div className="dropdown" style={{ height: menuHeight }} ref={dropdownRef}>
-  
+
         <CSSTransition
             in={activeMenu === 'main'}
             timeout={500}
@@ -108,7 +108,7 @@ const DropdownMenu = () => {
                 >Animals</DropdownItem> */}
             </div>
         </CSSTransition>
-  
+
         <CSSTransition
             in={activeMenu === 'settings'}
             timeout={500}
@@ -146,7 +146,7 @@ const DropdownMenu = () => {
                 <DropdownItem leftIcon={<ReportIcon />}>Report a Problem</DropdownItem>
             </div>
         </CSSTransition>
-  
+
         {/* <CSSTransition
             in={activeMenu === 'animals'}
             timeout={500}
