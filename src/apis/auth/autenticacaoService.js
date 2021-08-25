@@ -13,5 +13,8 @@ export const signIn = (login, password) => {
   return http.post(`${baseUrl}/api/autenticar`, {
     login,
     password
+  }).then(response => {
+    http.defaults.headers.authorization = `Bearer ${response.data.token}`
+    return response
   })
 }

@@ -11,15 +11,21 @@ import Post from './Post/Post';
 // import postImage from '../../img/story/storyImage/web-development.jpg'
 
 // database
-import db from '../../firebase'
+// import db from '../../firebase'
+import { getFeed } from '../../apis/post/PostService'
 
 const Feed = () => {
     const [posts, setPosts] = useState([]);
 
 
     useEffect(() => {
-        db.collection('posts').orderBy('timestamp', 'desc').onSnapshot(snapshot => {
-            setPosts(snapshot.docs.map(doc => ({ id: doc.id, data: doc.data() })));
+        // db.collection('posts').orderBy('timestamp', 'desc').onSnapshot(snapshot => {
+        //     setPosts(snapshot.docs.map(doc => ({ id: doc.id, data: doc.data() })));
+        // })
+        getFeed().then(({ data }) => {
+            data.forEach(feed => {
+                setPosts(feed.posts)
+            })
         })
     }, [])
 
@@ -31,12 +37,12 @@ const Feed = () => {
             {
                 posts.map(post => (
                     <Post
-                        key={post.data.id}
-                        profilePic={post.data.profilePic}
-                        message={post.data.message}
-                        timestamp={post.data.timestamp}
-                        username={post.data.username}
-                        image={post.data.image}
+                        key={post.id}
+                        profilePic={post.profilePic}
+                        message={post.message}
+                        timestamp={post.timestamp}
+                        username={post.username}
+                        image={post.image}
                     />
                 ))
             }
