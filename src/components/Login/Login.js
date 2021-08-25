@@ -20,26 +20,35 @@ const Login = () => {
     const [password, setPassword] = useState('')
 
     const register = () => {
-        singUp(login, password).then(({ data}) => {
+        singUp(login, password).then(({ data }) => {
             console.log(data)
         })
     }
 
     const doLogin = () => {
         // sign in
-        signIn(login, password).then(({ data}) => {
-            console.log(data)
-        })
-        auth.signInWithPopup(provider)
-            .then(result => {
-
-                dispatch({
-                    type: actionTypes.SET_USER,
-                    user: result.user
-                });
-                console.log(result);
+        signIn(login, password).then(({ data }) => {
+            data.usuario.token = data.token
+            const type = {
+                type: 'SET_USER',
+                user: data.usuario
+            }
+            console.log(type)
+            dispatch({
+                type: actionTypes.SET_USER,
+                user: type.user
             })
-            .catch(error => alert(error.message))
+            // auth.signInWithPopup(provider)
+            //     .then(result => {
+
+            //         dispatch({
+            //             type: actionTypes.SET_USER,
+            //             user: result.user
+            //         });
+            //         console.log(result);
+            //     })
+            //     .catch(error => alert(error.message))
+        })
     }
 
     return (
